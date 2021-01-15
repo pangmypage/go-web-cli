@@ -1,0 +1,125 @@
+definitions:
+  controllers.delUser:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  controllers.queryUser:
+    properties:
+      page:
+        description: 页码
+        type: integer
+      pagesize:
+        description: 每页数量
+        type: integer
+      role_name:
+        description: 角色名称
+        type: string
+      username:
+        description: 用户名
+        type: string
+    type: object
+  models.User:
+    properties:
+      created_at:
+        description: 创建时间，不用传
+        type: string
+      id:
+        description: id
+        type: string
+      password:
+        description: 密码
+        type: string
+      role_id:
+        description: 角色id
+        type: string
+      role_name:
+        description: 角色名称
+        type: string
+      updated_at:
+        description: 更新时间，不用传
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - role_id
+    - role_name
+    - username
+    type: object
+info:
+  contact: {}
+  description: API文档
+  termsOfService: http://swagger.io/terms/
+  title: API文档接口
+  version: "1.0"
+paths:
+  /user/del:
+    post:
+      consumes:
+      - application/json
+      description: 删除用户
+      parameters:
+      - description: 用户令牌
+        in: header
+        name: Authorization
+        type: string
+      - description: 查询参数
+        in: body
+        name: params
+        schema:
+          $ref: '#/definitions/controllers.delUser'
+      produces:
+      - application/json
+      summary: 删除用户接口
+      tags:
+      - 用户相关接口
+  /user/getlist:
+    post:
+      consumes:
+      - application/json
+      description: 删除用户
+      parameters:
+      - description: 用户令牌
+        in: header
+        name: Authorization
+        type: string
+      - description: 参数
+        in: body
+        name: params
+        schema:
+          $ref: '#/definitions/controllers.queryUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取用户接口
+      tags:
+      - 用户相关接口
+  /user/save:
+    post:
+      consumes:
+      - application/json
+      description: 添加用户
+      parameters:
+      - description: 用户令牌
+        in: header
+        name: Authorization
+        type: string
+      - description: 查询参数
+        in: body
+        name: params
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      summary: 添加用户接口
+      tags:
+      - 用户相关接口
+swagger: "2.0"
